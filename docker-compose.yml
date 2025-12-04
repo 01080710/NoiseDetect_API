@@ -1,0 +1,22 @@
+services:
+
+  # 後端 FastAPI 服務
+  backend:
+    build:
+      context: ./app  # 指定從 app 目錄構建映像
+      dockerfile: Dockerfile  # 顯式指定 Dockerfile 的位置（可選，默認為 Dockerfile）
+    container_name: backend
+    ports:
+      - "8009:8009"  # 將 FastAPI 端口暴露出來
+    networks:
+      - mynetwork
+    restart: always
+    env_file:
+      - .env # 讀取環境變數
+    volumes:
+      - "C:/inetpub/wwwroot/parameters/:/app/parameters/"
+      - ./log:/app/log
+
+networks:
+  mynetwork:
+    driver: bridge

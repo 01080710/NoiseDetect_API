@@ -1,0 +1,19 @@
+services:
+
+  # 後端 FastAPI 服務
+  backend:
+    image: changchikai/noisedetect_webapi:v1
+    container_name: backend
+    ports:
+      - "8009:8009"  # 將 FastAPI 端口暴露出來
+    networks:
+      - mynetwork
+    restart: always
+    env_file:
+      - .env # 讀取環境變數
+    volumes:
+      - "C:/inetpub/wwwroot/parameters/:/app/parameters/"
+      
+networks:
+  mynetwork:
+    driver: bridge
